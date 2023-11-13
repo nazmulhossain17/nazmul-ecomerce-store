@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { FaXmark, FaBars } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,19 +34,25 @@ const Navbar = () => {
         }`}
       >
         <div className="flex justify-between items-center text-base gap-8">
-          <a
-            href="#"
-            className="text-2xl font-semibold flex items-center space-x-3"
+          <Link
+            to="/"
+            className="md:flex space-x-12 hidden text-2xl font-semibold"
           >
             Nazmul Ecomerce
-          </a>
+          </Link>
           <ul className="md:flex space-x-12 hidden">
-            <li className="text-xl block text-gray-500 hover:text-green-700">
+            <Link
+              to="/"
+              className="text-xl block text-gray-500 hover:text-green-700"
+            >
               Home
-            </li>
-            <li className="text-xl block text-gray-500 hover:text-blue-700">
+            </Link>
+            <Link
+              to="/about"
+              className="text-xl block text-gray-500 hover:text-blue-700"
+            >
               about
-            </li>
+            </Link>
             <li className="text-xl block text-gray-500 hover:text-blue-700">
               product
             </li>
