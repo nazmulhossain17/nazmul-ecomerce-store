@@ -87,12 +87,18 @@ const Navbar = () => {
             isMenuOpen ? "block fixed top-0 right-0 left-0" : "hidden"
           }`}
         >
-          <li className="block text-base text-gray-500 hover:text-blue-700">
+          <Link
+            to="/"
+            className="block text-base text-gray-500 hover:text-blue-700"
+          >
             Home
-          </li>
-          <li className="block text-base text-gray-500 hover:text-blue-700">
+          </Link>
+          <Link
+            to="/about"
+            className="block text-base text-gray-500 hover:text-blue-700"
+          >
             about
-          </li>
+          </Link>
           <li className="block text-base text-gray-500 hover:text-blue-700">
             product
           </li>
