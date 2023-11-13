@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaXmark, FaBars } from "react-icons/fa6";
 
-const Header = () => {
+const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
 
@@ -40,16 +40,16 @@ const Header = () => {
             Nazmul Ecomerce
           </a>
           <ul className="md:flex space-x-12 hidden">
-            <li className="block text-base text-gray-500 hover:text-blue-700">
+            <li className="text-xl block text-gray-500 hover:text-green-700">
               Home
             </li>
-            <li className="block text-base text-gray-500 hover:text-blue-700">
+            <li className="text-xl block text-gray-500 hover:text-blue-700">
               about
             </li>
-            <li className="block text-base text-gray-500 hover:text-blue-700">
+            <li className="text-xl block text-gray-500 hover:text-blue-700">
               product
             </li>
-            <li className="block text-base text-gray-500 hover:text-blue-700">
+            <li className="text-xl block text-gray-500 hover:text-blue-700">
               contact
             </li>
           </ul>
@@ -76,7 +76,7 @@ const Header = () => {
           </div>
         </div>
         <div
-          className={`space-y-4 px-4 mt-16 py-7 bg-gray-300 ${
+          className={`space-y-4 px-4 mt-16 py-7 bg-white ${
             isMenuOpen ? "block fixed top-0 right-0 left-0" : "hidden"
           }`}
         >
@@ -98,4 +98,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Navbar;
