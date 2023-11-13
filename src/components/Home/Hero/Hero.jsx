@@ -7,7 +7,7 @@ const Hero = () => {
             LET’S
           </span>
           <br /> EXPLORE <br />
-          <span>UNIQUE</span>
+          <span>OUR</span>
           <br /> PRODUCTS.
         </h1>
         <p className="md:text-[32px]">

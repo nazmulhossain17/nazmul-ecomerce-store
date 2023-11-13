@@ -47,26 +47,39 @@ const Navbar = () => {
             >
               Home
             </Link>
+
+            <Link
+              to="/product"
+              className="text-xl block text-gray-500 hover:text-blue-700"
+            >
+              product
+            </Link>
             <Link
               to="/about"
               className="text-xl block text-gray-500 hover:text-blue-700"
             >
               about
             </Link>
-            <li className="text-xl block text-gray-500 hover:text-blue-700">
-              product
-            </li>
-            <li className="text-xl block text-gray-500 hover:text-blue-700">
+            <Link
+              to="/contact"
+              className="text-xl block text-gray-500 hover:text-blue-700"
+            >
               contact
-            </li>
+            </Link>
           </ul>
           <div className="space-x-12 hidden lg:flex items-center">
-            <a href="#" className="hidden lg:flex items-center text-green-300">
+            <Link
+              to="/login"
+              href="#"
+              className="hidden lg:flex items-center text-green-300"
+            >
               Login
-            </a>
-            <button className="bg-green-300 text-white py-2 px-4 transition-all duration-300 rounded">
-              Register
-            </button>
+            </Link>
+            <Link to="/register">
+              <button className="bg-green-300 text-white py-2 px-4 transition-all duration-300 rounded">
+                Register
+              </button>
+            </Link>
           </div>
 
           <div className="md:hidden">
@@ -94,17 +107,33 @@ const Navbar = () => {
             Home
           </Link>
           <Link
+            to="/product"
+            className="block text-base text-gray-500 hover:text-blue-700"
+          >
+            product
+          </Link>
+          <Link
             to="/about"
             className="block text-base text-gray-500 hover:text-blue-700"
           >
             about
           </Link>
-          <li className="block text-base text-gray-500 hover:text-blue-700">
-            product
-          </li>
-          <li className="block text-base text-gray-500 hover:text-blue-700">
+          <Link
+            to="/contact"
+            className="block text-base text-gray-500 hover:text-blue-700"
+          >
             contact
-          </li>
+          </Link>
+          <Link to="/login" className="">
+            <button className="mb-2 block w-full rounded border-2 border-primary px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:border-primary-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:border-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:border-primary-700 active:text-primary-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10">
+              Login
+            </button>
+          </Link>
+          <Link to="/register" className="">
+            <button className="mb-2 block w-full rounded border-2 border-green-500 px-6 pb-2 pt-2 text-xs font-medium uppercase leading-normal text-green-500 transition duration-150 ease-in-out hover:border-green-600 hover:bg-green-500 hover:bg-opacity-10 hover:text-green-600 focus:border-green-600 focus:text-green-600 focus:outline-none focus:ring-0 active:border-green-700 active:text-green-700 dark:hover:bg-green-500 dark:hover:bg-opacity-10">
+              Register
+            </button>
+          </Link>
         </div>
       </nav>
     </header>
