@@ -9,6 +9,10 @@ const Product = () => {
       .then((res) => res.json())
       .then((data) => setDemo(data));
   }, []);
+
+  const handleAddToCart = (demo) => {
+    console.log(demo);
+  };
   return (
     <>
       <div className="md:px-14 px-4 py-14 max-w-screen-2xl mx-auto">
@@ -19,7 +23,11 @@ const Product = () => {
       <div className="shop-container gap-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 space-x-1">
           {demo.map((item) => (
-            <Products key={item.id} demo={item} />
+            <Products
+              key={item.id}
+              demo={item}
+              handleAddToCart={handleAddToCart}
+            />
           ))}
         </div>
         <div className="cart-container max-w-sm rounded shadow-lg">

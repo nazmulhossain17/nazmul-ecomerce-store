@@ -24,6 +24,10 @@ const FeaturesDemo = ({ data }) => {
           <span>(256 Reviews)</span>
         </div>
         <p className="text-gray-900 text-base">Price: ${price}</p>
+        <br />
+        <button className="mb-2 block w-full rounded bg-purple-600 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg dark:shadow-lg dark:hover:shadow-lg dark:focus:shadow-lg dark:active:shadow-lg">
+          Buy
+        </button>
       </div>
     </div>
   );
