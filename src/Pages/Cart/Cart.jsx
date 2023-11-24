@@ -35,15 +35,20 @@ const Cart = () => {
               </div>
               <div className="border-l pl-5 flex flex-col justify-between">
                 <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white"
+                  className="bg-blue-500 rounded-2xl hover:bg-blue-700 text-white"
                   onClick={() => dispatch(addToCart(product))}
                 >
                   +
                 </button>
-                <button onClick={() => dispatch(removeOne(product))}>-</button>
+                <button
+                  className="bg-lime-500 rounded-2xl hover:bg-lime-700 text-white"
+                  onClick={() => dispatch(removeOne(product))}
+                >
+                  -
+                </button>
                 <button
                   onClick={() => dispatch(removeFromCart(product))}
-                  className="bg-red-500 hover:bg-red-400"
+                  className=" rounded-2xl hover:bg-red-400"
                 >
                   🗑️
                 </button>
