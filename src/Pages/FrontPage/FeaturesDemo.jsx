@@ -1,44 +1,52 @@
 import PropTypes from "prop-types";
-import ReactStars from "react-rating-stars-component";
+import toast, { Toaster } from "react-hot-toast";
+import { Link } from "react-router-dom";
+import { useAppDispatch } from "../../redux/hook";
+import { addToCart } from "../../redux/features/cart/cartSlice";
 
-const options = {
-  edit: true,
-  color: "rgba(20,20,20,0.1)",
-  activeColor: "tomato",
-  size: window.innerWidth < 600 ? 20 : 25,
-  value: 2.5,
-  isHalf: true,
-};
+const FeaturesDemo = ({ product }) => {
+  const dispatch = useAppDispatch();
 
-const FeaturesDemo = ({ data }) => {
-  const { category, img, price, description } = data;
+  const handleAddProduct = () => {
+    dispatch(addToCart(product));
+    toast({
+      description: "Product Added",
+    });
+  };
 
   return (
-    <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <img className="w-full" src={img} alt="product" />
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{category}</div>
-        <p className="text-gray-700 text-base">{description}</p>
-        <div>
-          <ReactStars {...options} />
-          <span>(256 Reviews)</span>
+    <>
+      <div>
+        <div className="rounded-2xl h-[480px] flex flex-col items-start justify-between p-5 overflow-hidden shadow-md border border-gray-100 hover:shadow-2xl hover:scale-[102%] transition-all gap-2">
+          <Link to={`/product-details/${product._id}`} className="w-full">
+            <img src={product?.image} alt="product" />
+            <h1 className="text-xl font-semibold">{product?.name}</h1>
+          </Link>
+          <p>Rating: {product?.rating || "N/A"}</p>
+          <p className="text-sm">
+            Availability: {product?.status ? "In stock" : "Out of stock"}
+          </p>
+          <p className="text-2xl">Price: ${product?.price}</p>
+          {/* <button
+            onClick={() => handleAddProduct(product)}
+            className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none"
+          >
+            Add to cart
+          </button> */}
         </div>
-        <p className="text-gray-900 text-base">Price: ${price}</p>
-        <br />
-        <button className="mb-2 block w-full rounded bg-purple-600 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg dark:shadow-lg dark:hover:shadow-lg dark:focus:shadow-lg dark:active:shadow-lg">
-          Buy
-        </button>
       </div>
-    </div>
+    </>
   );
 };
 
 FeaturesDemo.propTypes = {
-  data: PropTypes.shape({
-    category: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
+  product: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    image: PropTypes.string,
+    name: PropTypes.string,
+    rating: PropTypes.number,
+    status: PropTypes.bool,
+    price: PropTypes.number,
   }).isRequired,
 };
 

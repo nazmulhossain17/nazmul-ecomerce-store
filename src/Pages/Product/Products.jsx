@@ -1,40 +1,52 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { useAppDispatch } from "../../redux/hook";
+import { addToCart } from "../../redux/features/cart/cartSlice";
+import toast, { Toaster } from "react-hot-toast";
 
-const Products = ({ demo, handleAddToCart }) => {
-  const { id, category, name, img, price } = demo;
+const Products = ({ product }) => {
+  const dispatch = useAppDispatch();
+  const handleAddProduct = (product) => {
+    dispatch(addToCart(product));
+    toast.success("Product Added!");
+  };
 
   return (
-    <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <img className="w-full" src={img} alt="product" />
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">{name}</div>
-        <p className="text-gray-700 text-base">{category}</p>
-        <div>
-          {/* <ReactStars {...options} /> */}
-          <span>(256 Reviews)</span>
+    <>
+      <div>
+        <div className="rounded-2xl h-[480px] flex flex-col items-start justify-between p-5 overflow-hidden shadow-md border border-gray-100 hover:shadow-2xl hover:scale-[102%] transition-all gap-2">
+          <Link to={`/product-details/${product._id}`} className="w-full">
+            <img src={product?.image} alt="product" />
+            <h1 className="text-xl font-semibold">{product?.name}</h1>
+          </Link>
+          <p>Rating: {product?.rating}</p>
+          <p className="text-sm">
+            Availability: {product?.status ? "In stock" : "Out of stock"}
+          </p>
+          <p className="text-sm">Price: {product?.price}</p>
+          <button
+            onClick={() => handleAddProduct(product)}
+            className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none"
+          >
+            Add to cart
+          </button>
         </div>
-        <p className="text-gray-900 text-base">Price: ${price}</p>
-        <button
-          onClick={() => handleAddToCart(demo)} // Pass 'demo' object to handleAddToCart
-          className="mb-2 block w-full rounded bg-purple-600 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg dark:shadow-lg dark:hover:shadow-lg dark:focus:shadow-lg dark:active:shadow-lg"
-        >
-          Buy
-        </button>
       </div>
-    </div>
+    </>
   );
 };
 
 Products.propTypes = {
-  demo: PropTypes.shape({
-    category: PropTypes.string,
+  product: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    image: PropTypes.string,
     name: PropTypes.string,
-    img: PropTypes.string,
+    rating: PropTypes.number,
+    status: PropTypes.bool,
     price: PropTypes.number,
-    // Add other necessary prop types for demo object properties
   }).isRequired,
-  handleAddToCart: PropTypes.func.isRequired,
+  handleAddProduct: PropTypes.func.isRequired,
 };
 
 export default Products;
