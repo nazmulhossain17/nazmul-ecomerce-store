@@ -1,3 +1,5 @@
+import hero from "../../../assets/hero.png";
+
 const Hero = () => {
   return (
     <section className="flex flex-col container mx-auto bg-[#fafcfb] rounded-[59px] pt-16 px-10 md:items-center md:px-20 md:pt-[68px] md:flex-row md:justify-between gap-10 z-30 mt-20">
@@ -24,8 +26,8 @@ const Hero = () => {
       </div>
       <div className="">
         <img
-          className="w-full"
-          src="https://miro.medium.com/v2/resize:fit:1128/1*U9rNa6Tj11q_98LkcGRP2w.png"
+          className="h-auto max-w-full mb-12"
+          src={hero}
           alt="banner image"
         />
       </div>

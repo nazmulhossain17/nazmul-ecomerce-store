@@ -3,10 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { useAppDispatch } from "../../redux/hook";
 import {
+  deleteUserFailure,
+  deleteUserSuccess,
   signInFailure,
   signInStart,
   signInSuccess,
-  userAdded,
+  signOutUserStart,
 } from "../../redux/user/userSlice";
 
 const Login = () => {
@@ -41,12 +43,26 @@ const Login = () => {
         return;
       }
       dispatch(signInSuccess(data));
-      dispatch(userAdded(data));
       toast.success("Login successful");
       navigate("/");
     } catch (error) {
       console.error("Fetch error:", error.message);
       dispatch(signInFailure(error.message));
+    }
+  };
+
+  const handleLogOut = async () => {
+    try {
+      dispatch(signOutUserStart());
+      const res = await fetch("http://localhost:3000/api/auth/logout");
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
     }
   };
   return (
@@ -116,6 +132,7 @@ const Login = () => {
                   </svg>
                   <span className="inline-block ml-1">Forgot Password</span>
                 </button>
+                <button onClick={handleLogOut}>Sign out</button>
               </div>
             </div>
           </div>

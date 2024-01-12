@@ -58,7 +58,7 @@ const Cart = () => {
         </div>
         <div className="mt-6 flex items-center justify-between">
           <h1 className="text-2xl font-semibold text-gray-900">
-            Total Price{" "}
+            Total Price
             <span className="text-2xl font-semibold text-gray-900">
               ${total.toFixed(2)}
             </span>

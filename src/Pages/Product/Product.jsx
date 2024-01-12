@@ -8,18 +8,12 @@ import {
 import { useGetProductsQuery } from "../../redux/api/apiSlice";
 
 const Product = () => {
-  // const [data, setData] = useState([]);
-  // const [cart, setCart] = useState([]);
-
-  // useEffect(() => {
-  //   fetch("http://localhost:3000/api/v1/products")
-  //     .then((res) => res.json())
-  //     .then((data) => setData(data));
-  // }, []);
-
   const { data, isLoading } = useGetProductsQuery(undefined);
   const dispatch = useAppDispatch();
   const { priceRange, status } = useAppSelector((state) => state.product);
+
+  // Step 1: Add state for search query
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleSlider = (e) => {
     dispatch(setPriceRange(Number(e.target.value)));
@@ -28,46 +22,68 @@ const Product = () => {
   let productsData;
 
   if (!isLoading) {
+    // Step 2: Update filter logic based on search query
     productsData = data?.map((item) => ({
       ...item,
       // imageUrl: `http://localhost:5173/images/${item.image}`,
     }));
     if (status) {
       productsData = productsData?.filter(
-        (item) => item.status === true && item.price <= priceRange
+        (item) =>
+          item.status === true &&
+          item.price <= priceRange &&
+          item.name.toLowerCase().includes(searchQuery.toLowerCase()) // Case-insensitive search
       );
     } else if (priceRange > 0) {
-      productsData = productsData?.filter((item) => item.price <= priceRange);
+      productsData = productsData?.filter(
+        (item) =>
+          item.price <= priceRange &&
+          item.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
     }
   }
 
   return (
     <>
-      <div className="grid grid-cols-12 max-w-7xl mx-auto relative ">
-        <div className="col-span-3 z mr-10 space-y-5 border rounded-2xl border-gray-200/80 p-5 self-start sticky top-16 h-[calc(100vh-80px)]">
-          <div>
-            <h1 className="text-2xl uppercase">Availability</h1>
-            <div
-              className="flex items-center space-x-2 mt-3"
-              onClick={() => dispatch(toggleState())}
+      <div className="grid grid-cols-1 md:grid-cols-12 max-w-7xl mx-auto relative">
+        <div className="bg-slate-100 md:bg-white md:col-span-3 z mr-19 mt-4 space-y-5 border border-gray-200/80 p-7 self-start sticky top-16 h-[calc(40vh-80px)]">
+          <form>
+            <label
+              htmlFor="default-search"
+              className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
             >
-              {/* <switch id="in-stock" /> */}
-              {/* <label htmlFor="in-stock">In stock</label> */}
-              <label
-                htmlFor="in-stock"
-                className="relative inline-flex items-center cursor-pointer"
-              >
-                <input
-                  id="in-stock"
-                  type="checkbox"
-                  value=""
-                  className="sr-only peer"
-                />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-              </label>
+              Search
+            </label>
+            <div className="relative">
+              <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg
+                  className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="search"
+                className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Search "
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                required
+              />
             </div>
-          </div>
-          <div className="space-y-3 ">
+          </form>
+
+          <div className="space-y-3">
             <h1 className="text-2xl uppercase">Price Range</h1>
             <div className="max-w-xl">
               <input
@@ -83,11 +99,14 @@ const Product = () => {
             <div>From 0$ To {priceRange}$</div>
           </div>
         </div>
-        <div className="col-span-9 grid grid-cols-3 gap-10 pb-20">
+
+        <div className="col-span-9 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 p-5">
           {!isLoading && productsData ? (
-            productsData.map((product) => (
-              <Products product={product} key={product.id} />
-            ))
+            productsData
+              .filter((product) =>
+                product.name.toLowerCase().includes(searchQuery.toLowerCase())
+              )
+              .map((product) => <Products product={product} key={product.id} />)
           ) : (
             <div>Loading...</div>
           )}

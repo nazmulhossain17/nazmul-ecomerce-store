@@ -28,12 +28,10 @@ const Navbar = () => {
     };
   });
   return (
-    <header className="w-full bg-white md:bg-transparent fixed top-0 left-0 right-0">
+    <header className="w-full bg-orange-100 md:bg-transparent fixed top-0 left-0 right-0">
       <nav
-        className={`py-4 lg:px-14 px-4 ${
-          isSticky
-            ? "sticky top-0 left-0 right-0 border-b bg-white duration-300"
-            : ""
+        className={`py-4 lg:px-14 px-4 bg-lime-100 ${
+          isSticky ? "sticky top-0 left-0 right-0 border-b  duration-300" : ""
         }`}
       >
         <div className="flex justify-between items-center text-base gap-8">
