@@ -3,11 +3,30 @@ import { useSelector } from "react-redux";
 import { FaXmark, FaBars } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { selectCart } from "../../../redux/features/cart/cartSlice";
+import { useAppDispatch, useAppSelector } from "../../../redux/hook";
+import { LuChevronsDown } from "react-icons/lu";
+import {
+  deleteUserFailure,
+  deleteUserSuccess,
+  signOutUserStart,
+} from "../../../redux/user/userSlice";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const cart = useSelector(selectCart);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
+  const dispatch = useAppDispatch();
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const closeDropdown = () => {
+    setIsDropdownOpen(false);
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -15,7 +34,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (Window.scrollY > 100) {
+      if (window.scrollY > 100) {
         setIsSticky(true);
       } else {
         setIsSticky(false);
@@ -24,13 +43,41 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.addEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
-  });
+  }, []);
+
+  const handleLogOut = async () => {
+    try {
+      dispatch(signOutUserStart());
+      const res = await fetch("http://localhost:3000/api/auth/logout", {
+        method: "GET",
+        credentials: "include", // Include credentials (cookies) in the request
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+
+      const data = await res.json();
+
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+
+      // Clear the access token on the client side (assuming you're using cookies)
+      // document.cookie = "access_token=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+
+      dispatch(deleteUserSuccess(data));
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
   return (
     <header className="w-full bg-orange-100 md:bg-transparent fixed top-0 left-0 right-0">
       <nav
-        className={`py-4 lg:px-14 px-4 bg-lime-100 ${
+        className={`py-4 lg:px-14 px-4 bg-lime-100${
           isSticky ? "sticky top-0 left-0 right-0 border-b  duration-300" : ""
         }`}
       >
@@ -69,11 +116,70 @@ const Navbar = () => {
             </Link>
           </ul>
           <div className="space-x-12 hidden lg:flex items-center">
-            <Link to="/login">
-              <button className="bg-green-300 text-white py-2 px-4 transition-all duration-300 rounded">
-                Login
-              </button>
-            </Link>
+            {currentUser ? ( // Check if user is logged in
+              <div className="relative inline-block text-left">
+                <button
+                  onClick={toggleDropdown}
+                  type="button"
+                  className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-dark"
+                  id="dropdownButton"
+                  aria-haspopup="true"
+                  aria-expanded="true"
+                >
+                  {currentUser?.user.name}
+                  <hr />
+                  <span className="mt-3">
+                    <LuChevronsDown className="text-pink-900" />
+                  </span>
+                </button>
+
+                {isDropdownOpen && (
+                  <div
+                    className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby="dropdownButton"
+                  >
+                    <div
+                      className="py-1"
+                      role="menuitem"
+                      onClick={closeDropdown}
+                    >
+                      <button className="block px-4 py-2 text-sm text-gray-700 hover:text-blue-600">
+                        Dashboard
+                      </button>
+                    </div>
+                    <div
+                      className="py-1"
+                      role="menuitem"
+                      onClick={closeDropdown}
+                    >
+                      <button className="block px-4 py-2 text-sm text-gray-700 hover:text-green-600">
+                        Settings
+                      </button>
+                    </div>
+                    <div
+                      className="py-1"
+                      role="menuitem"
+                      onClick={closeDropdown}
+                    >
+                      <button
+                        onClick={handleLogOut}
+                        className="block px-4 py-2 text-sm text-gray-700  hover:text-red-600"
+                      >
+                        Log out
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link to="/login">
+                <button className="bg-green-300 text-white py-2 px-4 transition-all duration-300 rounded">
+                  Login
+                </button>
+              </Link>
+            )}
             <Link to="/cart">
               {/* <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -166,11 +272,51 @@ const Navbar = () => {
           >
             Cart
           </Link>
-          <Link to="/login" className="">
-            <button className="mb-2 block w-full rounded border-2 border-green-500 px-6 pb-2 pt-2 text-xs font-medium uppercase leading-normal text-green-500 transition duration-150 ease-in-out hover:border-green-600 hover:bg-green-500 hover:bg-opacity-10 hover:text-green-600 focus:border-green-600 focus:text-green-600 focus:outline-none focus:ring-0 active:border-green-700 active:text-green-700 dark:hover:bg-green-500 dark:hover:bg-opacity-10">
-              login
-            </button>
-          </Link>
+          {currentUser ? (
+            <div className="relative inline-block text-right">
+              <button
+                onClick={toggleDropdown}
+                type="button"
+                className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-green-500 border focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-200"
+                id="dropdownButton"
+                aria-haspopup="true"
+                aria-expanded={isDropdownOpen ? "true" : "false"}
+              >
+                {currentUser.user.name}
+              </button>
+              {isDropdownOpen && (
+                <div
+                  className="origin-top-right absolute  mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="dropdownButton"
+                  style={{ zIndex: 1001 }}
+                >
+                  <div className="py-1" role="menuitem" onClick={closeDropdown}>
+                    <button className="w-full text-center py-2 text-sm text-black">
+                      Dashboard
+                    </button>
+                  </div>
+                  <div className="py-1" role="menuitem" onClick={closeDropdown}>
+                    <button className="w-full text-center py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      Settings
+                    </button>
+                  </div>
+                  <div className="py-1" role="menuitem" onClick={closeDropdown}>
+                    <button className="w-full text-center py-2 text-sm text-red-700">
+                      Log out
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <Link to="/login">
+              <button className="bg-green-300 text-white py-2 px-4 transition-all duration-300 rounded">
+                Login
+              </button>
+            </Link>
+          )}
         </div>
       </nav>
     </header>

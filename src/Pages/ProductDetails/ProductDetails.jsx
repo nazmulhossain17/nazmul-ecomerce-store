@@ -32,9 +32,13 @@ const ProductDetails = () => {
             <h1 className="text-3xl font-semibold">{product?.name}</h1>
             <p className="text-xl">Rating: {product?.rating}</p>
             <ul className="space-y-1 text-lg">
-              {product?.features?.map((feature, index) => (
-                <li key={index}>{feature}</li>
-              ))}
+              {Array.isArray(product?.description) ? (
+                product?.description.map((feature, index) => (
+                  <li key={index}>{feature}</li>
+                ))
+              ) : (
+                <li>{product?.description}</li>
+              )}
             </ul>
             <button
               onClick={() => handleAddProduct(product)}

@@ -46,7 +46,7 @@ const Product = () => {
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-12 max-w-7xl mx-auto relative">
-        <div className="bg-slate-100 md:bg-white md:col-span-3 z mr-19 mt-4 space-y-5 border border-gray-200/80 p-7 self-start sticky top-16 h-[calc(40vh-80px)]">
+        <div className="bg-slate-100 md:bg-white md:col-span-3 z-0 mr-19 mt-4 space-y-5 border border-gray-200/80 p-7 self-start sticky top-16 h-[calc(40vh-80px)]">
           <form>
             <label
               htmlFor="default-search"
