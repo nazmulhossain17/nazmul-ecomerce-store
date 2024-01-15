@@ -51,20 +51,6 @@ const Login = () => {
     }
   };
 
-  const handleLogOut = async () => {
-    try {
-      dispatch(signOutUserStart());
-      const res = await fetch("http://localhost:3000/api/auth/logout");
-      const data = await res.json();
-      if (data.success === false) {
-        dispatch(deleteUserFailure(data.message));
-        return;
-      }
-      dispatch(deleteUserSuccess(data));
-    } catch (error) {
-      dispatch(deleteUserFailure(error.message));
-    }
-  };
   return (
     <div className="min-h-screen bg-white flex flex-col justify-center sm:py-12">
       <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
@@ -132,7 +118,6 @@ const Login = () => {
                   </svg>
                   <span className="inline-block ml-1">Forgot Password</span>
                 </button>
-                <button onClick={handleLogOut}>Sign out</button>
               </div>
             </div>
           </div>

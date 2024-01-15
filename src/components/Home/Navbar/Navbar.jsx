@@ -17,6 +17,12 @@ const Navbar = () => {
   const cart = useSelector(selectCart);
   const currentUser = useAppSelector((state) => state.user.currentUser);
   const dispatch = useAppDispatch();
+  const headingStyle = {
+    background: "linear-gradient(90deg, rgb(45 167 167), rgb(169 5 130))",
+    WebkitBackgroundClip: "text",
+    backgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+  };
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -75,16 +81,19 @@ const Navbar = () => {
     }
   };
   return (
-    <header className="w-full bg-orange-100 md:bg-transparent fixed top-0 left-0 right-0">
+    <header className="w-full bg-slate-100 md:bg-transparent fixed top-0 left-0 right-0">
       <nav
-        className={`py-4 lg:px-14 px-4 bg-lime-100${
-          isSticky ? "sticky top-0 left-0 right-0 border-b  duration-300" : ""
+        className={`py-4 lg:px-14 px-4 bg-slate-100${
+          isSticky
+            ? "sticky top-0 bg-slate-100 left-0 right-0 border-b  duration-300"
+            : ""
         }`}
       >
         <div className="flex justify-between items-center text-base gap-8">
           <Link
             to="/"
-            className="md:flex space-x-12 hidden text-2xl font-semibold"
+            style={headingStyle}
+            className="md:flex space-x-12 hidden text-3xl font-monospace font-bold"
           >
             Nazmul Ecomerce
           </Link>
@@ -231,7 +240,11 @@ const Navbar = () => {
                 <FaBars className="h-6 w-6" />
               )}
             </button>
-            <Link to="/" className="p-2 mx-3 text-2xl font-semibold">
+            <Link
+              style={headingStyle}
+              to="/"
+              className="p-2 mx-3 text-3xl font-monospace font-bold"
+            >
               Nazmul Ecomerce
             </Link>
           </div>
@@ -303,7 +316,10 @@ const Navbar = () => {
                     </button>
                   </div>
                   <div className="py-1" role="menuitem" onClick={closeDropdown}>
-                    <button className="w-full text-center py-2 text-sm text-red-700">
+                    <button
+                      onClick={handleLogOut}
+                      className="w-full text-center py-2 text-sm text-red-700"
+                    >
                       Log out
                     </button>
                   </div>

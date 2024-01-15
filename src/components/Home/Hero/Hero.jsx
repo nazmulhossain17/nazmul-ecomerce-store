@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import hero from "../../../assets/hero.png";
 
 const Hero = () => {
@@ -16,12 +17,12 @@ const Hero = () => {
           Get our lates products Influential and Innovative fashion!
         </p>
         <div className="flex flex-col md:flex-row md:items-center justify-evenly gap-9 pt-8">
-          <button
-            className="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800 "
-            href="#"
+          <Link
+            to="/product"
+            className="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-3.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white "
           >
             Shop Now
-          </button>
+          </Link>
         </div>
       </div>
       <div className="">
