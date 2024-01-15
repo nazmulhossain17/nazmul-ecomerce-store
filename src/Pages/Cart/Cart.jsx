@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   addToCart,
   removeFromCart,
@@ -9,6 +9,20 @@ import { useAppDispatch, useAppSelector } from "../../redux/hook";
 const Cart = () => {
   const { products, total } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate(); // Import useNavigate from react-router-dom
+
+  const currentUser = useAppSelector((state) => state.user.currentUser);
+
+  const handleCheckout = () => {
+    // Check if the user is logged in
+    if (currentUser) {
+      // User is logged in, navigate to the checkout page
+      navigate("/checkout");
+    } else {
+      // User is not logged in, navigate to the login page
+      navigate("/login"); // Update the path to your login page
+    }
+  };
   return (
     <>
       <div className="my-8">
@@ -66,8 +80,8 @@ const Cart = () => {
         </div>
 
         <Link
+          onClick={handleCheckout}
           className="mt-4 inline-flex w-full items-center justify-center rounded bg-purple-600 py-2.5 px-4 text-base font-semibold tracking-wide text-white text-opacity-80 outline-none ring-offset-2 transition hover:text-opacity-100 focus:ring-2 focus:ring-teal-500 sm:text-lg"
-          to="/checkout"
         >
           Checkout
         </Link>
