@@ -1,7 +1,6 @@
-import { BrowserRouter, Route, RouterProvider, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import { RouterProvider } from "react-router-dom";
 import router from "./Routes/Routes";
-
 function App() {
   return (
     <>
