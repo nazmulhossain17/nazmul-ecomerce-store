@@ -11,6 +11,9 @@ import NotFoundPage from "../Pages/NotFoundPage/NotFoundPage";
 import Checkout from "../Pages/Checkout/Checkout";
 import ProductDetails from "../Pages/ProductDetails/ProductDetails";
 import PrivateRoute from "./PrivateRoute";
+import DashboardLayout from "../Layout/DashboardLayout";
+import DashboardUser from "../Pages/Dashboard/DashboardUser";
+import CreateProduct from "../components/Home/shared/Create/CreateProduct";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +63,24 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "/dashboard",
+        element: <DashboardUser></DashboardUser>,
+      },
+      {
+        path: "/dashboard/create-product",
+        element: <CreateProduct />,
       },
     ],
   },

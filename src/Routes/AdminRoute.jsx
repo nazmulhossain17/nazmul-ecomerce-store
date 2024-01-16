@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react";
 import PropTypes from "prop-types";
 import { useAppSelector } from "../redux/hook";
 
-const PrivateRoute = ({ children }) => {
+const AdminRoute = ({ children }) => {
   const navigate = useNavigate();
   const currentUser = useAppSelector((state) => state.user.currentUser);
 
@@ -18,8 +18,8 @@ const PrivateRoute = ({ children }) => {
   return currentUser ? <>{children}</> : null;
 };
 
-PrivateRoute.propTypes = {
+AdminRoute.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default PrivateRoute;
+export default AdminRoute;
