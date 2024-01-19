@@ -16,7 +16,7 @@ const ProductDetails = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-4 md:p-8">
+    <div className="max-w-7xl mx-auto p-4 md:p-8 mt-7">
       {isLoading && <p>Loading...</p>}
       {error && <p>Error: {error.message}</p>}
       {product && (

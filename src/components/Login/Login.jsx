@@ -35,10 +35,9 @@ const Login = () => {
       }
 
       const data = await res.json();
-      console.log(data); // Log the response data
+      console.log(data);
 
       if (data.success === false) {
-        // Handle unsuccessful login here
         dispatch(signInFailure(data.message));
         return;
       }
@@ -54,7 +53,7 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-white flex flex-col justify-center sm:py-12">
       <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
-        <h1 className="font-bold text-center text-2xl mb-5">Your Logo</h1>
+        <h1 className="font-bold text-center text-2xl mb-5">Login</h1>
         <div className="bg-white shadow-2xl w-full rounded-lg divide-y divide-gray-200">
           <div className="px-5 py-7">
             <form onSubmit={handleSubmit}>
