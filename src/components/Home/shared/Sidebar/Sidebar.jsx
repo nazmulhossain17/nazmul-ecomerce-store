@@ -40,12 +40,13 @@ const Sidebar = () => {
       <nav>
         <ul className="space-y-2">
           <li>
-            <a
+            <Link
+              to="/dashboard"
               href="#"
               className="flex items-center justify-between p-2 hover:bg-gray-700"
             >
-              <span className="text-left">Agenda</span>
-            </a>
+              <span className="text-left">Home</span>
+            </Link>
           </li>
           <li>
             <a

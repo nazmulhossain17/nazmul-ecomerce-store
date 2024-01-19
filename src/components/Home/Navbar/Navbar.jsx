@@ -22,6 +22,12 @@ const Navbar = () => {
     WebkitBackgroundClip: "text",
     backgroundClip: "text",
     WebkitTextFillColor: "transparent",
+    animation: "gradient 3s linear infinite",
+    "@keyframes gradient": {
+      "0%": { backgroundPosition: "0% 75%" },
+      "50%": { backgroundPosition: "100% 50%" },
+      "100%": { backgroundPosition: "0% 70%" },
+    },
   };
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
