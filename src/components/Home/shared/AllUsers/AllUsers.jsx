@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
+import toast from "react-hot-toast";
 
 const AllUsers = () => {
   const [user, setUser] = useState([]);
@@ -19,9 +20,10 @@ const AllUsers = () => {
   const handleConfirmDelete = async () => {
     try {
       const res = await fetch(
-        `http://localhost:3000/api/delete/${selectedUserId}`,
+        `http://localhost:3000/api/auth/delete/${selectedUserId}`,
         {
           method: "DELETE",
+          credentials: "include",
         }
       );
 
@@ -36,6 +38,7 @@ const AllUsers = () => {
       // Close the modal
       setDeleteModalOpen(false);
       setSelectedUserId(null);
+      toast.success("User Deleted successful");
     } catch (error) {
       console.error("Error deleting user:", error);
     }
@@ -58,7 +61,7 @@ const AllUsers = () => {
   return (
     <>
       <div className=" w-full sm:px-8">
-        <h1>yu: {user.length}</h1>
+        <h1>All users: {user.length}</h1>
         <div className="overflow-y-hidden rounded-lg border">
           <div className="overflow-x-auto">
             <table className="w-full">
@@ -66,7 +69,7 @@ const AllUsers = () => {
                 <tr className="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
                   <th className="px-5 py-3">ID</th>
                   <th className="px-5 py-3">Full Name</th>
-                  <th className="px-5 py-3">User Role</th>
+                  <th className="px-5 py-3">User Email</th>
                   <th className="px-5 py-3">Created at</th>
                   <th className="px-5 py-3">Status</th>
                 </tr>
@@ -92,7 +95,8 @@ const AllUsers = () => {
                       </div>
                     </td>
                     <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                      <p className="whitespace-no-wrap">user</p>
+                      <p className="whitespace-no-wrap">{d.email}</p>
+                      <p className="whitespace-no-wrap">{d.address}</p>
                     </td>
                     <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
                       <p className="whitespace-no-wrap">{d.createdAt}</p>
