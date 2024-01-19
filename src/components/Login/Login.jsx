@@ -3,12 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { useAppDispatch } from "../../redux/hook";
 import {
-  deleteUserFailure,
-  deleteUserSuccess,
   signInFailure,
   signInStart,
   signInSuccess,
-  signOutUserStart,
 } from "../../redux/user/userSlice";
 
 const Login = () => {
@@ -21,14 +18,17 @@ const Login = () => {
     e.preventDefault();
     try {
       dispatch(signInStart());
-      const res = await fetch("http://localhost:3000/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-        credentials: "include",
-      });
+      const res = await fetch(
+        "https://nazmul-ecomerce-server-1wnx.vercel.app/api/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+          credentials: "include",
+        }
+      );
 
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`);

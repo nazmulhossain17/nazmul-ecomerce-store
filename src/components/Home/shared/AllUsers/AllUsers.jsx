@@ -20,7 +20,7 @@ const AllUsers = () => {
   const handleConfirmDelete = async () => {
     try {
       const res = await fetch(
-        `http://localhost:3000/api/auth/delete/${selectedUserId}`,
+        `https://nazmul-ecomerce-server-1wnx.vercel.app/api/auth/delete/${selectedUserId}`,
         {
           method: "DELETE",
           credentials: "include",
@@ -47,10 +47,13 @@ const AllUsers = () => {
   useEffect(() => {
     async function getData() {
       try {
-        const res = await fetch("http://localhost:3000/api/auth/user-info", {
-          method: "GET",
-          credentials: "include",
-        });
+        const res = await fetch(
+          "https://nazmul-ecomerce-server-1wnx.vercel.app/api/auth/user-info",
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
         const data = await res.json();
         console.log(data.payload.products);
         setUser(data.payload.products);

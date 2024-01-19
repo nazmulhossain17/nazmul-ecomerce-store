@@ -14,7 +14,7 @@ const CreateProduct = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/create-product",
+        "https://nazmul-ecomerce-server-1wnx.vercel.app/api/v1/create-product",
         data,
         {
           headers: {

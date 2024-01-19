@@ -14,7 +14,7 @@ const Register = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/register",
+        "https://nazmul-ecomerce-server-1wnx.vercel.app/api/auth/register",
         data,
         {
           headers: {

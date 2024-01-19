@@ -62,10 +62,13 @@ const Navbar = () => {
   const handleLogOut = async () => {
     try {
       dispatch(signOutUserStart());
-      const res = await fetch("http://localhost:3000/api/auth/logout", {
-        method: "GET",
-        credentials: "include", // Include credentials (cookies) in the request
-      });
+      const res = await fetch(
+        "https://nazmul-ecomerce-server-1wnx.vercel.app/api/auth/logout",
+        {
+          method: "GET",
+          credentials: "include", // Include credentials (cookies) in the request
+        }
+      );
 
       if (!res.ok) {
         throw new Error(`HTTP error! Status: ${res.status}`);
