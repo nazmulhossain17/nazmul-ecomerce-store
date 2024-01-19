@@ -47,7 +47,10 @@ const AllUsers = () => {
   useEffect(() => {
     async function getData() {
       try {
-        const res = await fetch("http://localhost:3000/api/auth/user-info");
+        const res = await fetch("http://localhost:3000/api/auth/user-info", {
+          method: "GET",
+          credentials: "include",
+        });
         const data = await res.json();
         console.log(data.payload.products);
         setUser(data.payload.products);
