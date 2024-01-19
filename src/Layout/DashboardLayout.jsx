@@ -28,9 +28,13 @@ const DashboardLayout = () => {
             </div>
             <div className="flex items-center space-x-4">
               <span className="text-lime-50 text-xl">
-                Welcome! {currentUser.user.name}
+                Welcome! {currentUser?.user.name}
               </span>
-              <i className="fas fa-user-circle text-white text-2xl"></i>
+
+              <img
+                className="w-10 h-10 rounded-full"
+                src={currentUser?.user.image}
+              />
             </div>
           </nav>
           <div className="flex">

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useAppDispatch } from "../../../../redux/hook";
+import { useAppDispatch, useAppSelector } from "../../../../redux/hook";
 import {
   deleteUserFailure,
   deleteUserSuccess,
@@ -8,6 +8,7 @@ import {
 
 const Sidebar = () => {
   const dispatch = useAppDispatch();
+  const currentUser = useAppSelector((state) => state.user.currentUser);
   const handleLogOut = async () => {
     try {
       dispatch(signOutUserStart());
@@ -42,43 +43,38 @@ const Sidebar = () => {
           <li>
             <Link
               to="/dashboard"
-              href="#"
               className="flex items-center justify-between p-2 hover:bg-gray-700"
             >
               <span className="text-left">Home</span>
             </Link>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to="/dashboard/create-product"
               className="flex items-center justify-between p-2 hover:bg-gray-700"
             >
-              <Link to="/dashboard/create-product" className="text-left">
-                Create Product
+              <span className="text-left">Create Product</span>
+            </Link>
+          </li>
+          {currentUser.user.isAdmin && (
+            <li>
+              <Link
+                to="/dashboard/all-users"
+                className="flex items-center justify-between p-2 hover:bg-gray-700"
+              >
+                <span className="text-left">All Users</span>
               </Link>
-            </a>
-          </li>
+            </li>
+          )}
           <li>
-            <a
-              href="#"
-              className="flex items-center justify-between p-2 hover:bg-gray-700"
-            >
-              <span className="text-left">Informes</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="flex items-center justify-between p-2 hover:bg-gray-700"
-            >
-              <span className="text-left">Documentación</span>
-            </a>
-            <a
-              href="#"
+            <Link
+              to="/dashboard/update"
               className="flex items-center justify-between p-2 hover:bg-gray-700"
             >
               <span className="text-left">Settings</span>
-            </a>
+            </Link>
+          </li>
+          <li>
             <h1
               onClick={handleLogOut}
               className="flex items-center cursor-pointer justify-between p-2 hover:bg-gray-700 hover:text-red-700"

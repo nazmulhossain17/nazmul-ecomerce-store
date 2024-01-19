@@ -14,6 +14,8 @@ import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "../Layout/DashboardLayout";
 import DashboardUser from "../Pages/Dashboard/DashboardUser";
 import CreateProduct from "../components/Home/shared/Create/CreateProduct";
+import Update from "../components/Home/shared/Update/Update";
+import AllUsers from "../components/Home/shared/AllUsers/AllUsers";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +83,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/create-product",
         element: <CreateProduct />,
+      },
+      {
+        path: "/dashboard/update",
+        element: <Update />,
+      },
+      {
+        path: "/dashboard/all-users",
+        element: <AllUsers />,
       },
     ],
   },

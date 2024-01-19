@@ -172,9 +172,12 @@ const Navbar = () => {
                       role="menuitem"
                       onClick={closeDropdown}
                     >
-                      <button className="block px-4 py-2 text-sm text-gray-700 hover:text-green-600">
+                      <Link
+                        to="/dashboard/update"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:text-green-600"
+                      >
                         Settings
-                      </button>
+                      </Link>
                     </div>
                     <div
                       className="py-1"

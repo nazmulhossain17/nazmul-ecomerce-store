@@ -128,7 +128,7 @@ const CreateProduct = () => {
                   </svg>
                 )}
                 <span>
-                  {loading ? "Creating Account..." : "Create Account"}
+                  {loading ? "Creating Product..." : "Create Product"}
                 </span>
               </button>
             </div>
