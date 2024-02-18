@@ -18,7 +18,7 @@ const FeaturesDemo = ({ product }) => {
     <>
       <div>
         <div className="rounded-2xl h-[480px] flex flex-col items-start justify-between p-5 overflow-hidden shadow-md border border-gray-100 hover:shadow-2xl hover:scale-[102%] transition-all gap-2">
-          <Link to={`/product-details/${product._id}`} className="w-full">
+          <Link to={`/product-details/${product.id}`} className="w-full">
             <img src={product?.image} alt="product" />
             <h1 className="text-xl font-semibold">{product?.name}</h1>
           </Link>
@@ -29,7 +29,7 @@ const FeaturesDemo = ({ product }) => {
           <p className="text-2xl">Price: ${product?.price}</p>
           {/* <button
             onClick={() => handleAddProduct(product)}
-            className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none"
+            className="px-6 py-2 uppercase transition duration-200 ease-in border-2 border-gray-900 rounded-full hover:bg-gray-800 hover:text-white focus:outline-none"
           >
             Add to cart
           </button> */}
@@ -41,7 +41,7 @@ const FeaturesDemo = ({ product }) => {
 
 FeaturesDemo.propTypes = {
   product: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     image: PropTypes.string,
     name: PropTypes.string,
     rating: PropTypes.number,
