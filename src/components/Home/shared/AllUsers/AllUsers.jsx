@@ -20,7 +20,7 @@ const AllUsers = () => {
   const handleConfirmDelete = async () => {
     try {
       const res = await fetch(
-        `https://nazmul-ecomerce-server-1wnx.vercel.app/api/auth/delete/${selectedUserId}`,
+        `https://ecomerce-project-api.vercel.app/api/auth/delete/${selectedUserId}`,
         {
           method: "DELETE",
           credentials: "include",
@@ -66,13 +66,13 @@ const AllUsers = () => {
 
   return (
     <>
-      <div className=" w-full sm:px-8">
+      <div className="w-full  sm:px-8">
         <h1>All users: {user.length}</h1>
-        <div className="overflow-y-hidden rounded-lg border">
+        <div className="overflow-y-hidden border rounded-lg">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
+                <tr className="text-xs font-semibold tracking-widest text-left text-white uppercase bg-blue-600">
                   <th className="px-5 py-3">ID</th>
                   <th className="px-5 py-3">Full Name</th>
                   <th className="px-5 py-3">User Email</th>
@@ -83,14 +83,14 @@ const AllUsers = () => {
               <tbody className="text-gray-500">
                 {user.map((d, index) => (
                   <tr key={d._id}>
-                    <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                    <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
                       <p className="whitespace-no-wrap">{index + 1}</p>
                     </td>
-                    <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                    <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
                       <div className="flex items-center">
-                        <div className="h-10 w-10 flex-shrink-0">
+                        <div className="flex-shrink-0 w-10 h-10">
                           <img
-                            className="h-full w-full rounded-full"
+                            className="w-full h-full rounded-full"
                             src={d?.image}
                             alt=""
                           />
@@ -100,18 +100,18 @@ const AllUsers = () => {
                         </div>
                       </div>
                     </td>
-                    <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                    <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
                       <p className="whitespace-no-wrap">{d.email}</p>
                       <p className="whitespace-no-wrap">{d.address}</p>
                     </td>
-                    <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                    <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
                       <p className="whitespace-no-wrap">{d.createdAt}</p>
                     </td>
 
-                    <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                    <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
                       <button
                         onClick={() => handleDelete(d._id)}
-                        className="rounded-full bg-red-500 px-3 py-1 text-xs font-semibold text-white"
+                        className="px-3 py-1 text-xs font-semibold text-white bg-red-500 rounded-full"
                       >
                         Delete
                       </button>

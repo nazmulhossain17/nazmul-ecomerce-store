@@ -13,7 +13,7 @@ const Sidebar = () => {
     try {
       dispatch(signOutUserStart());
       const res = await fetch(
-        "https://nazmul-ecomerce-server-1wnx.vercel.app/api/auth/logout",
+        "https://ecomerce-project-api.vercel.app/api/auth/logout",
         {
           method: "GET",
           credentials: "include", // Include credentials (cookies) in the request
@@ -40,7 +40,7 @@ const Sidebar = () => {
     }
   };
   return (
-    <aside className="bg-gray-800 text-white w-64 min-h-screen p-4">
+    <aside className="w-64 min-h-screen p-4 text-white bg-gray-800">
       <nav>
         <ul className="space-y-2">
           <li>
@@ -80,7 +80,7 @@ const Sidebar = () => {
           <li>
             <h1
               onClick={handleLogOut}
-              className="flex items-center cursor-pointer justify-between p-2 hover:bg-gray-700 hover:text-red-700"
+              className="flex items-center justify-between p-2 cursor-pointer hover:bg-gray-700 hover:text-red-700"
             >
               <span className="text-left">Log out</span>
             </h1>

@@ -14,7 +14,7 @@ const CreateProduct = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://nazmul-ecomerce-server-1wnx.vercel.app/api/v1/create-product",
+        "https://ecomerce-project-api.vercel.app/api/v1/create-product",
         data,
         {
           headers: {
@@ -41,11 +41,11 @@ const CreateProduct = () => {
 
   return (
     <>
-      <div className="bg-gray-100 flex items-center justify-center">
-        <div className="max-w-2xl w-full p-4">
-          <h1 className="text-3xl font-semibold mb-4">Create Product</h1>
+      <div className="flex items-center justify-center bg-gray-100">
+        <div className="w-full max-w-2xl p-4">
+          <h1 className="mb-4 text-3xl font-semibold">Create Product</h1>
           <form
-            className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-2 lg:grid-cols-5"
+            className="grid grid-cols-1 gap-4 text-sm gap-y-2 md:grid-cols-2 lg:grid-cols-5"
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="lg:col-span-5">
@@ -54,7 +54,7 @@ const CreateProduct = () => {
                 type="text"
                 name="product_name"
                 id="product_name"
-                className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
                 {...register("name")}
               />
             </div>
@@ -64,7 +64,7 @@ const CreateProduct = () => {
                 type="text"
                 name="image_url"
                 id="image_url"
-                className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
                 {...register("image")}
               />
             </div>
@@ -74,7 +74,7 @@ const CreateProduct = () => {
                 type="text"
                 name="category"
                 id="category"
-                className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
                 {...register("category")}
               />
             </div>
@@ -84,7 +84,7 @@ const CreateProduct = () => {
                 type="number"
                 name="price"
                 id="price"
-                className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
                 {...register("price")}
               />
             </div>
@@ -93,7 +93,7 @@ const CreateProduct = () => {
               <textarea
                 name="description"
                 id="description"
-                className="h-20 border mt-1 rounded px-4 w-full bg-gray-50 resize-none"
+                className="w-full h-20 px-4 mt-1 border rounded resize-none bg-gray-50"
                 {...register("description")}
               ></textarea>
             </div>
@@ -107,7 +107,7 @@ const CreateProduct = () => {
               >
                 {loading && (
                   <svg
-                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    className="w-5 h-5 mr-3 -ml-1 text-white animate-spin"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"

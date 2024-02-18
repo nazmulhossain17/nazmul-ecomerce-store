@@ -63,7 +63,7 @@ const Navbar = () => {
     try {
       dispatch(signOutUserStart());
       const res = await fetch(
-        "https://nazmul-ecomerce-server-1wnx.vercel.app/api/auth/logout",
+        "https://ecomerce-project-api.vercel.app/api/auth/logout",
         {
           method: "GET",
           credentials: "include", // Include credentials (cookies) in the request
@@ -90,7 +90,7 @@ const Navbar = () => {
     }
   };
   return (
-    <header className="w-full bg-slate-100 md:bg-transparent fixed top-0 left-0 right-0">
+    <header className="fixed top-0 left-0 right-0 w-full bg-slate-100 md:bg-transparent">
       <nav
         className={`py-4 lg:px-14 px-4 bg-slate-100${
           isSticky
@@ -98,42 +98,42 @@ const Navbar = () => {
             : ""
         }`}
       >
-        <div className="flex justify-between items-center text-base gap-8">
+        <div className="flex items-center justify-between gap-8 text-base">
           <Link
             to="/"
             style={headingStyle}
-            className="md:flex space-x-12 hidden text-3xl font-monospace font-bold"
+            className="hidden space-x-12 text-3xl font-bold md:flex font-monospace"
           >
             Nazmul Ecomerce
           </Link>
-          <ul className="md:flex space-x-12 hidden">
+          <ul className="hidden space-x-12 md:flex">
             <Link
               to="/"
-              className="text-xl block text-gray-500 hover:text-green-700"
+              className="block text-xl text-gray-500 hover:text-green-700"
             >
               Home
             </Link>
 
             <Link
               to="/product"
-              className="text-xl block text-gray-500 hover:text-blue-700"
+              className="block text-xl text-gray-500 hover:text-blue-700"
             >
               product
             </Link>
             <Link
               to="/about"
-              className="text-xl block text-gray-500 hover:text-blue-700"
+              className="block text-xl text-gray-500 hover:text-blue-700"
             >
               about
             </Link>
             <Link
               to="/contact"
-              className="text-xl block text-gray-500 hover:text-blue-700"
+              className="block text-xl text-gray-500 hover:text-blue-700"
             >
               contact
             </Link>
           </ul>
-          <div className="space-x-12 hidden lg:flex items-center">
+          <div className="items-center hidden space-x-12 lg:flex">
             {currentUser ? ( // Check if user is logged in
               <div className="relative inline-block text-left">
                 <button
@@ -153,7 +153,7 @@ const Navbar = () => {
 
                 {isDropdownOpen && (
                   <div
-                    className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
+                    className="absolute right-0 w-48 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5"
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="dropdownButton"
@@ -189,7 +189,7 @@ const Navbar = () => {
                     >
                       <button
                         onClick={handleLogOut}
-                        className="block px-4 py-2 text-sm text-gray-700  hover:text-red-600"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:text-red-600"
                       >
                         Log out
                       </button>
@@ -199,7 +199,7 @@ const Navbar = () => {
               </div>
             ) : (
               <Link to="/login">
-                <button className="bg-green-300 text-white py-2 px-4 transition-all duration-300 rounded">
+                <button className="px-4 py-2 text-white transition-all duration-300 bg-green-300 rounded">
                   Login
                 </button>
               </Link>
@@ -221,8 +221,8 @@ const Navbar = () => {
               </svg>
               <span className="ml-1">{cart.products.length}</span> */}
               <div className="relative py-2">
-                <div className="t-0 absolute left-3">
-                  <p className="flex h-2 w-2 items-center justify-center rounded-full bg-red-500 p-3 text-xs text-white">
+                <div className="absolute t-0 left-3">
+                  <p className="flex items-center justify-center w-2 h-2 p-3 text-xs text-white bg-red-500 rounded-full">
                     {cart.products.length}
                   </p>
                 </div>
@@ -232,7 +232,7 @@ const Navbar = () => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="file: mt-2 h-6 w-6"
+                  className="w-6 h-6 mt-2 file:"
                 >
                   <path
                     strokeLinecap="round"
@@ -244,21 +244,21 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <div className="md:hidden my-2">
+          <div className="my-2 md:hidden">
             <button
               onClick={toggleMenu}
               className="text-gray-400 focus:outline-none focus:text-gray-500"
             >
               {isMenuOpen ? (
-                <FaXmark className="h-6 w-6" />
+                <FaXmark className="w-6 h-6" />
               ) : (
-                <FaBars className="h-6 w-6" />
+                <FaBars className="w-6 h-6" />
               )}
             </button>
             <Link
               style={headingStyle}
               to="/"
-              className="p-2 mx-3 text-3xl font-monospace font-bold"
+              className="p-2 mx-3 text-3xl font-bold font-monospace"
             >
               Nazmul Ecomerce
             </Link>
@@ -314,26 +314,26 @@ const Navbar = () => {
               </button>
               {isDropdownOpen && (
                 <div
-                  className="origin-top-right absolute  mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  className="absolute w-48 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="dropdownButton"
                   style={{ zIndex: 1001 }}
                 >
                   <div className="py-1" role="menuitem" onClick={closeDropdown}>
-                    <button className="w-full text-center py-2 text-sm text-black">
+                    <button className="w-full py-2 text-sm text-center text-black">
                       Dashboard
                     </button>
                   </div>
                   <div className="py-1" role="menuitem" onClick={closeDropdown}>
-                    <button className="w-full text-center py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <button className="w-full py-2 text-sm text-center text-gray-700 hover:bg-gray-100">
                       Settings
                     </button>
                   </div>
                   <div className="py-1" role="menuitem" onClick={closeDropdown}>
                     <button
                       onClick={handleLogOut}
-                      className="w-full text-center py-2 text-sm text-red-700"
+                      className="w-full py-2 text-sm text-center text-red-700"
                     >
                       Log out
                     </button>
@@ -343,7 +343,7 @@ const Navbar = () => {
             </div>
           ) : (
             <Link to="/login">
-              <button className="bg-green-300 text-white py-2 px-4 transition-all duration-300 rounded">
+              <button className="px-4 py-2 text-white transition-all duration-300 bg-green-300 rounded">
                 Login
               </button>
             </Link>
