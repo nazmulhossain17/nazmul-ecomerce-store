@@ -23,7 +23,7 @@ const Register = () => {
         }
       );
 
-      if (!response.data.user) {
+      if (response.data.user) {
         console.log("Registration successful");
         toast.success("Account created successful");
         setLoading(false);

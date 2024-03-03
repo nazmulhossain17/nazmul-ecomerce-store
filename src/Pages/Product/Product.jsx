@@ -3,7 +3,6 @@ import Products from "./Products";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import {
   setPriceRange,
-  toggleState,
 } from "../../redux/features/products/productSlice";
 import { useGetProductsQuery } from "../../redux/api/apiSlice";
 
@@ -45,7 +44,7 @@ const Product = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 mt-7 p-4 md:grid-cols-12 max-w-7xl mx-auto relative">
+      <div className="relative grid grid-cols-1 p-4 mx-auto mt-7 md:grid-cols-12 max-w-7xl">
         <div className="bg-slate-100 md:bg-white md:col-span-3 z-0 mr-19 mt-4 space-y-5 border border-gray-200/80 p-7 self-start sticky top-16 h-[calc(40vh-80px)]">
           <form>
             <label
@@ -55,7 +54,7 @@ const Product = () => {
               Search
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+              <div className="absolute inset-y-0 flex items-center pointer-events-none start-0 ps-3">
                 <svg
                   className="w-4 h-4 text-gray-500 dark:text-gray-400"
                   aria-hidden="true"
@@ -74,7 +73,7 @@ const Product = () => {
               </div>
               <input
                 type="search"
-                className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg ps-10 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search "
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -100,7 +99,7 @@ const Product = () => {
           </div>
         </div>
 
-        <div className="col-span-9 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 p-5">
+        <div className="grid grid-cols-1 col-span-9 gap-5 p-5 md:grid-cols-2 lg:grid-cols-4">
           {!isLoading && productsData ? (
             productsData
               .filter((product) =>
