@@ -3,15 +3,20 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import { useAppSelector } from "../../../../redux/hook";
 
 const CreateProduct = () => {
   const { register, handleSubmit } = useForm();
+  const currentUser = useAppSelector((state) => state.user.currentUser);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const ownerId = currentUser?.user?.id;
+  console.log(ownerId)
 
   const onSubmit = async (data) => {
     console.log(data);
     setLoading(true);
+    data.ownerId = ownerId;
     try {
       const response = await axios.post(
         "https://ecomerce-project-api.vercel.app/api/v1/create-product",
