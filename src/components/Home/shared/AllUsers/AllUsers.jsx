@@ -20,7 +20,7 @@ const AllUsers = () => {
   const handleConfirmDelete = async () => {
     try {
       const res = await fetch(
-        `https://ecomerce-project-api.vercel.app/api/auth/delete/${selectedUserId}`,
+        `${import.meta.env.VITE_API_URL}/api/auth/delete/${selectedUserId}`,
         {
           method: "DELETE",
           credentials: "include",
@@ -48,7 +48,7 @@ const AllUsers = () => {
     async function getData() {
       try {
         const res = await fetch(
-          "https://nazmul-ecomerce-server-1wnx.vercel.app/api/auth/user-info",
+          `${import.meta.env.VITE_API_URL}/api/auth/user-info`,
           {
             method: "GET",
             credentials: "include",
@@ -66,7 +66,7 @@ const AllUsers = () => {
 
   return (
     <>
-      <div className="w-full  sm:px-8">
+      <div className="w-full sm:px-8">
         <h1>All users: {user.length}</h1>
         <div className="overflow-y-hidden border rounded-lg">
           <div className="overflow-x-auto">

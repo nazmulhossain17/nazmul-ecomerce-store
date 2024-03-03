@@ -13,7 +13,7 @@ const Sidebar = () => {
     try {
       dispatch(signOutUserStart());
       const res = await fetch(
-        "https://ecomerce-project-api.vercel.app/api/auth/logout",
+        `${import.meta.env.VITE_API_URL}/api/auth/logout`,
         {
           method: "GET",
           credentials: "include", // Include credentials (cookies) in the request

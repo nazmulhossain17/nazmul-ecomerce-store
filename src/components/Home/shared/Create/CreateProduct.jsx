@@ -18,7 +18,7 @@ const CreateProduct = () => {
     data.ownerId = ownerId;
     try {
       const response = await axios.post(
-        "https://ecomerce-project-api.vercel.app/api/v1/create-product",
+        `${import.meta.env.VITE_API_URL}/api/v1/create-product`,
         data,
         {
           headers: {

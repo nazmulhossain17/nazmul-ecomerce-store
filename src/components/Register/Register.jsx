@@ -14,7 +14,7 @@ const Register = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://ecomerce-project-api.vercel.app/api/auth/register",
+        `${import.meta.env.VITE_API_URL}/api/auth/register`,
         data,
         {
           headers: {

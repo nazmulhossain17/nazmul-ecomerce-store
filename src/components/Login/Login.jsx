@@ -19,7 +19,7 @@ const Login = () => {
     try {
       dispatch(signInStart());
       const res = await fetch(
-        "https://ecomerce-project-api.vercel.app/api/auth/login",
+        `${import.meta.env.VITE_API_URL}/api/auth/login`,
         {
           method: "POST",
           headers: {
