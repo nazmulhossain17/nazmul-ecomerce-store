@@ -21,6 +21,7 @@ const Products = ({ product }) => {
             <h1 className="text-xl font-semibold">{product?.name}</h1>
           </Link>
           <p>Rating: {product?.rating}</p>
+          <p>seller: {product?.sellerName}</p>
           <p className="text-sm">
             Availability: {product?.status ? "In stock" : "Out of stock"}
           </p>
@@ -43,10 +44,10 @@ Products.propTypes = {
     image: PropTypes.string,
     name: PropTypes.string,
     rating: PropTypes.number,
+    sellerName: PropTypes.string,
     status: PropTypes.bool,
     price: PropTypes.number,
   }).isRequired,
-  handleAddProduct: PropTypes.func.isRequired,
 };
 
 export default Products;

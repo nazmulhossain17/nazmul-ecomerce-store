@@ -11,11 +11,13 @@ const CreateProduct = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const ownerId = currentUser?.user?.id;
+  const sellerName = currentUser?.user?.name;
 
   const onSubmit = async (data) => {
     console.log(data);
     setLoading(true);
     data.ownerId = ownerId;
+    data.sellerName = sellerName;
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/v1/create-product`,

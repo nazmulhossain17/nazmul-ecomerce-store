@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import Products from "./Products";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
-import {
-  setPriceRange,
-} from "../../redux/features/products/productSlice";
+import { setPriceRange } from "../../redux/features/products/productSlice";
 import { useGetProductsQuery } from "../../redux/api/apiSlice";
 
 const Product = () => {
@@ -17,30 +15,6 @@ const Product = () => {
   const handleSlider = (e) => {
     dispatch(setPriceRange(Number(e.target.value)));
   };
-
-  let productsData;
-
-  if (!isLoading) {
-    // Step 2: Update filter logic based on search query
-    productsData = data?.map((item) => ({
-      ...item,
-      // imageUrl: `http://localhost:5173/images/${item.image}`,
-    }));
-    if (status) {
-      productsData = productsData?.filter(
-        (item) =>
-          item.status === true &&
-          item.price <= priceRange &&
-          item.name.toLowerCase().includes(searchQuery.toLowerCase()) // Case-insensitive search
-      );
-    } else if (priceRange > 0) {
-      productsData = productsData?.filter(
-        (item) =>
-          item.price <= priceRange &&
-          item.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    }
-  }
 
   return (
     <>
@@ -100,10 +74,15 @@ const Product = () => {
         </div>
 
         <div className="grid grid-cols-1 col-span-9 gap-5 p-5 md:grid-cols-2 lg:grid-cols-4">
-          {!isLoading && productsData ? (
-            productsData
+          {!isLoading ? (
+            data
               .filter((product) =>
-                product.name.toLowerCase().includes(searchQuery.toLowerCase())
+                (searchQuery
+                  ? product.name
+                      .toLowerCase()
+                      .includes(searchQuery.toLowerCase())
+                  : true) &&
+                product.price
               )
               .map((product) => <Products product={product} key={product.id} />)
           ) : (
