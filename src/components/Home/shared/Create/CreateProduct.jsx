@@ -11,7 +11,6 @@ const CreateProduct = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const ownerId = currentUser?.user?.id;
-  console.log(ownerId)
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -90,7 +89,7 @@ const CreateProduct = () => {
                 name="price"
                 id="price"
                 className="w-full h-10 px-4 mt-1 border rounded bg-gray-50"
-                {...register("price")}
+                {...register("price", { valueAsNumber: true })}
               />
             </div>
             <div className="lg:col-span-5">
